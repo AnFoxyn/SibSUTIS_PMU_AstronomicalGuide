@@ -1,7 +1,6 @@
 package com.sibsutis.galaxyapp.four_screen.data.remote.localdata
 
 import com.sibsutis.galaxyapp.four_screen.data.remote.dto.NewsDto
-import com.sibsutis.galaxyapp.four_screen.domain.models.News
 
 
 // unused

@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
 import javax.inject.Inject
-import kotlin.math.truncate
 
 class GetNewsUseCase @Inject constructor(
     private val repository: NewsRepository
