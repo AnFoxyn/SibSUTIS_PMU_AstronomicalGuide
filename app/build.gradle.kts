@@ -1,8 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    //alias(libs.plugins.hilt)
+    //alias(libs.plugins.compose.compiler) apply false
     id("kotlin-kapt")
-    //id("com.google.dagger.hilt.android")
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -53,8 +56,15 @@ android {
 
 dependencies {
 
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    //kapt("groupId:artifactId:version")
+    implementation("com.google.dagger:hilt-android:2.52")
+    kapt("com.google.dagger:hilt-compiler:2.52")
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -72,7 +82,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
-/*
 kapt {
     correctErrorTypes = true
-}*/
+}
