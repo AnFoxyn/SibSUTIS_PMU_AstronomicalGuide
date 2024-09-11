@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GalaxyApp</string>
+    <string name="http_error">Http exception ocurred</string>
+    <string name="io_error">IOException ocurred</string>
+    <string name="item_load">Loading...</string>
+    <string name="item_error">Item error occured</string>
 </resources>

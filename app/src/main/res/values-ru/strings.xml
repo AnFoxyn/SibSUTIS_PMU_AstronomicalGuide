@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Астрономический справочник ✨</string>
+    <string name="http_error">Ошибка сервера</string>
+    <string name="io_error">Нет подключения к интернету!</string>
+    <string name="item_load">Загрузка</string>
+    <string name="item_error">Ошибка загрузки предмета</string>
+</resources>
