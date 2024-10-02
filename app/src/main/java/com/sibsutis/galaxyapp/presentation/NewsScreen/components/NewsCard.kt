@@ -1,4 +1,4 @@
-package com.sibsutis.galaxyapp.four_screen.presentation.components
+package com.sibsutis.galaxyapp.presentation.NewsScreen.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sibsutis.galaxyapp.four_screen.domain.models.News
+import com.sibsutis.galaxyapp.domain.models.News
 
 @Composable
 fun NewsCard(news: News){

@@ -1,6 +1,6 @@
-package com.sibsutis.galaxyapp.four_screen.presentation
+package com.sibsutis.galaxyapp.presentation.NewsScreen
 
-import com.sibsutis.galaxyapp.four_screen.domain.models.News
+import com.sibsutis.galaxyapp.domain.models.News
 
 data class FourScreenState(
     val isLoading: Boolean = false,

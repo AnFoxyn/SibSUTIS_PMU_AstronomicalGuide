@@ -1,4 +1,4 @@
-package com.sibsutis.galaxyapp.four_screen.presentation.components
+package com.sibsutis.galaxyapp.presentation.NewsScreen.components
 
 import android.os.Build
 import androidx.annotation.RequiresExtension
@@ -8,8 +8,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.sibsutis.galaxyapp.four_screen.domain.models.News
-import com.sibsutis.galaxyapp.four_screen.presentation.FourScreenViewModel
+import com.sibsutis.galaxyapp.domain.models.News
+import com.sibsutis.galaxyapp.presentation.NewsScreen.FourScreenViewModel
 
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @Composable

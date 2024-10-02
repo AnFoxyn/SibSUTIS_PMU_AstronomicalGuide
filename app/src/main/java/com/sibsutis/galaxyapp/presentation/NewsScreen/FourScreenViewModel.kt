@@ -1,4 +1,4 @@
-package com.sibsutis.galaxyapp.four_screen.presentation
+package com.sibsutis.galaxyapp.presentation.NewsScreen
 
 import android.os.Build
 import androidx.annotation.RequiresExtension
@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sibsutis.galaxyapp.R
 import com.sibsutis.galaxyapp.common.Resource
-import com.sibsutis.galaxyapp.four_screen.domain.models.News
-import com.sibsutis.galaxyapp.four_screen.domain.usecase.GetNewsUseCase
+import com.sibsutis.galaxyapp.domain.models.News
+import com.sibsutis.galaxyapp.domain.usecase.GetNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
