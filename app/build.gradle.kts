@@ -3,8 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     //alias(libs.plugins.hilt)
     //alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.compose.compiler)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    alias(libs.plugins.kotlin.serialization)
 
 }
 
@@ -56,10 +58,14 @@ android {
 
 dependencies {
 
+
+    implementation(libs.kotlinx.serialization.json)
     //kapt("groupId:artifactId:version")
     implementation("com.google.dagger:hilt-android:2.52")
     kapt("com.google.dagger:hilt-compiler:2.52")
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation("androidx.navigation:navigation-compose:2.8.0")
+
 
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)
