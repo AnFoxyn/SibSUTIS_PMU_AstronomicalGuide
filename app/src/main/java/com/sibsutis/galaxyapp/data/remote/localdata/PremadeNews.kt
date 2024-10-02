@@ -1,9 +1,10 @@
-package com.sibsutis.galaxyapp.four_screen.data.remote
+package com.sibsutis.galaxyapp.data.remote.localdata
 
-import com.sibsutis.galaxyapp.four_screen.data.remote.dto.NewsDto
+import com.sibsutis.galaxyapp.data.remote.dto.NewsDto
 
-class NewsApiImpl : NewsApi {
 
+// unused
+class PremadeNews() {
     val readyNews = listOf<NewsDto>(
         NewsDto(
             "Официант выдал котлету за элитный стейк: клиент в шоке!",
@@ -69,7 +70,7 @@ class NewsApiImpl : NewsApi {
         ),
     )
 
-    override suspend fun GetNews(): List<NewsDto> {
+    fun makeLocalNews(): List<NewsDto> {
         return readyNews.shuffled()
     }
 }

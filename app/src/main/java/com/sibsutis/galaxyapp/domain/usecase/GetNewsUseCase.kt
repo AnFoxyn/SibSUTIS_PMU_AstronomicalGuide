@@ -1,13 +1,13 @@
-package com.sibsutis.galaxyapp.four_screen.domain.usecase
+package com.sibsutis.galaxyapp.domain.usecase
 
 import android.net.http.HttpException
 import android.os.Build
 import androidx.annotation.RequiresExtension
 import com.sibsutis.galaxyapp.R
 import com.sibsutis.galaxyapp.common.Resource
-import com.sibsutis.galaxyapp.four_screen.data.converter.toNews
-import com.sibsutis.galaxyapp.four_screen.domain.models.News
-import com.sibsutis.galaxyapp.four_screen.domain.repository.NewsRepository
+import com.sibsutis.galaxyapp.data.converter.toNews
+import com.sibsutis.galaxyapp.domain.models.News
+import com.sibsutis.galaxyapp.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException

@@ -1,9 +1,9 @@
 package com.sibsutis.galaxyapp.di
 
-import com.sibsutis.galaxyapp.four_screen.data.remote.NewsApi
-import com.sibsutis.galaxyapp.four_screen.data.remote.NewsApiImpl
-import com.sibsutis.galaxyapp.four_screen.data.repository.NewsRepositoryImpl
-import com.sibsutis.galaxyapp.four_screen.domain.repository.NewsRepository
+import com.sibsutis.galaxyapp.data.remote.NewsApi
+import com.sibsutis.galaxyapp.data.remote.NewsApiImpl
+import com.sibsutis.galaxyapp.data.repository.NewsRepositoryImpl
+import com.sibsutis.galaxyapp.domain.repository.NewsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,7 +23,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesNewsRepository(api: NewsApi): NewsRepository{
+    fun providesNewsRepository(api: NewsApi): NewsRepository {
         return NewsRepositoryImpl(api)
     }
 

@@ -1,4 +1,4 @@
-package com.sibsutis.galaxyapp.four_screen.domain.models
+package com.sibsutis.galaxyapp.domain.models
 
 data class News(
     val title: String,

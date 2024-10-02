@@ -1,4 +1,4 @@
-package com.sibsutis.galaxyapp.four_screen.data.remote.dto
+package com.sibsutis.galaxyapp.data.remote.dto
 
 data class NewsDto(
     val title: String,

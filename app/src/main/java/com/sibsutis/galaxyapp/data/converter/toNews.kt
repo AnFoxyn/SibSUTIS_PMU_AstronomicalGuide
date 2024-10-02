@@ -1,7 +1,7 @@
-package com.sibsutis.galaxyapp.four_screen.data.converter
+package com.sibsutis.galaxyapp.data.converter
 
-import com.sibsutis.galaxyapp.four_screen.data.remote.dto.NewsDto
-import com.sibsutis.galaxyapp.four_screen.domain.models.News
+import com.sibsutis.galaxyapp.data.remote.dto.NewsDto
+import com.sibsutis.galaxyapp.domain.models.News
 import kotlin.random.Random
 
 fun toNews(news : List<NewsDto>) : List<News>{
