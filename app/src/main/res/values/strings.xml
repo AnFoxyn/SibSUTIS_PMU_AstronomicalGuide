@@ -4,4 +4,9 @@
     <string name="io_error">IOException ocurred</string>
     <string name="item_load">Loading...</string>
     <string name="item_error">Item error occured</string>
+    <string name="menu_word">Menu</string>
+    <string name="news_word">News</string>
+    <string name="astro_word">Astronomical</string>
+    <string name="adv_word">Advertisement</string>
+    <string name="cube_word">Cube</string>
 </resources>

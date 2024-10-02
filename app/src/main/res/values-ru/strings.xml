@@ -5,4 +5,9 @@
     <string name="io_error">Нет подключения к интернету!</string>
     <string name="item_load">Загрузка</string>
     <string name="item_error">Ошибка загрузки предмета</string>
+    <string name="menu_word">Меню</string>
+    <string name="news_word">Новости</string>
+    <string name="astro_word">Астрономический</string>
+    <string name="adv_word">Реклама</string>
+    <string name="cube_word">Куб</string>
 </resources>
