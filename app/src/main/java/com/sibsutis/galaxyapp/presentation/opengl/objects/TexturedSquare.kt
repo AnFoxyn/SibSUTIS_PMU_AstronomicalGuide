@@ -50,7 +50,7 @@ class TexturedSquare(private val context: Context) {
         GLES20.glEnableVertexAttribArray(positionHandle)
         GLES20.glEnableVertexAttribArray(texCoordHandle)
 
-        val stride = 5 * 4 // 5 elements per vertex, 4 bytes per float
+        val stride = 5 * 4
         vertexBuffer.position(0)
         GLES20.glVertexAttribPointer(
             positionHandle,
@@ -89,7 +89,7 @@ class TexturedSquare(private val context: Context) {
         }
 
         val options = BitmapFactory.Options()
-        options.inScaled = false // No pre-scaling
+        options.inScaled = false
 
         val bitmap = BitmapFactory.decodeResource(context.resources, resourceId, options)
             ?: throw RuntimeException("Error loading texture.")

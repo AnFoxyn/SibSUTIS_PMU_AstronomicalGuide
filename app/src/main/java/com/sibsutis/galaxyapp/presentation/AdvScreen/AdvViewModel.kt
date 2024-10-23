@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sibsutis.galaxyapp.R
 import com.sibsutis.galaxyapp.common.Resource
-import com.sibsutis.galaxyapp.domain.models.News
 import com.sibsutis.galaxyapp.domain.usecase.GetNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn

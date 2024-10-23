@@ -1,6 +1,7 @@
 package com.sibsutis.galaxyapp.presentation.opengl.objects
 
 import android.opengl.GLES20
+import org.intellij.lang.annotations.Language
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -41,12 +42,10 @@ class Sphere(
                 val y = cosTheta
                 val z = sinPhi * sinTheta
 
-                // Добавляем вершину (позицию) и цвет
                 vertexList.add(x * radius)
                 vertexList.add(y * radius)
                 vertexList.add(z * radius)
 
-                // Текстурные координаты
                 val u = 1f - (long / longitudeBands.toFloat())
                 val v = 1f - (lat / latitudeBands.toFloat())
                 textureList.add(u)
@@ -54,7 +53,6 @@ class Sphere(
             }
         }
 
-        // Генерация индексов для треугольников
         for (lat in 0 until latitudeBands) {
             for (long in 0 until longitudeBands) {
                 val first = (lat * (longitudeBands + 1) + long).toShort()
@@ -117,7 +115,6 @@ class Sphere(
 
         GLES20.glVertexAttribPointer(positionHandle, 3, GLES20.GL_FLOAT, false, 0, vertexBuffer)
 
-        // Привязываем текстурные координаты
         GLES20.glVertexAttribPointer(texCoordHandle, 2, GLES20.GL_FLOAT, false, 0, textureBuffer)
 
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
@@ -136,6 +133,7 @@ class Sphere(
     }
 
     companion object {
+        @Language("GLSL")
         private const val VERTEX_SHADER_CODE = """
             attribute vec4 a_Position;
             attribute vec2 a_TexCoord;
@@ -148,6 +146,7 @@ class Sphere(
             }
         """
 
+        @Language("GLSL")
         private const val FRAGMENT_SHADER_CODE = """
             precision mediump float;
             varying vec2 v_TexCoord;

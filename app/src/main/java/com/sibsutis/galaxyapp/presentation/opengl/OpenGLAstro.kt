@@ -6,15 +6,14 @@ import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.GLUtils
 import android.opengl.Matrix
-import com.sibsutis.galaxyapp.presentation.opengl.objects.Sphere
 import com.sibsutis.galaxyapp.R
 import com.sibsutis.galaxyapp.presentation.opengl.objects.Cube
+import com.sibsutis.galaxyapp.presentation.opengl.objects.Sphere
 import com.sibsutis.galaxyapp.presentation.opengl.objects.TexturedSquare
 import org.intellij.lang.annotations.Language
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
-import java.nio.ShortBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.cos

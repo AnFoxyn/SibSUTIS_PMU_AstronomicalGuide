@@ -6,18 +6,12 @@ import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.GLUtils
 import android.opengl.Matrix
-import com.sibsutis.galaxyapp.presentation.opengl.objects.Sphere
 import com.sibsutis.galaxyapp.R
 import com.sibsutis.galaxyapp.presentation.opengl.objects.Cube
 import com.sibsutis.galaxyapp.presentation.opengl.objects.TexturedSquare
 import org.intellij.lang.annotations.Language
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
-import java.nio.FloatBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
-import kotlin.math.cos
-import kotlin.math.sin
 
 class OpenGLCube(private val context: Context) : GLSurfaceView.Renderer {
     private lateinit var square: TexturedSquare
@@ -45,7 +39,6 @@ class OpenGLCube(private val context: Context) : GLSurfaceView.Renderer {
         square = TexturedSquare(context)
         square.initialize()
 
-        // Initialize line shaders
         lineProgram = loadLineShaderProgram()
     }
 
@@ -80,7 +73,7 @@ class OpenGLCube(private val context: Context) : GLSurfaceView.Renderer {
     precision mediump float;
     uniform vec4 vColor;
     void main() {
-        gl_FragColor = vColor; // Color of the lines
+        gl_FragColor = vColor;
     }
     """.trimIndent()
 
