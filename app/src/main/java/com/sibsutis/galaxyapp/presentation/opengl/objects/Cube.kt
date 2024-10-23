@@ -1,6 +1,6 @@
 package com.sibsutis.galaxyapp.presentation.opengl.objects
+
 import android.opengl.GLES20
-import android.util.Log
 import org.intellij.lang.annotations.Language
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -13,17 +13,16 @@ class Cube {
     private lateinit var indexBuffer: ShortBuffer
 
     private val vertices = floatArrayOf(
-
-        -1f, 1f, 1f,       0f, 0f, 0f, 1f,
-        -1f, -1f, 1f,      0f, 0f, 0f, 1f,
-        1f, -1f, 1f,       0f, 0f, 1f, 1f,
-        1f, 1f, 1f,        0f, 0f, 0f, 1f,
-        -1f, 1f, -1f,      0f, 0f, 0f, 1f,
-        -1f, -1f, -1f,     0f, 0f, 0f, 1f,
-        1f, -1f, -1f,      0f, 0f, 1f, 1f,
-        1f, 1f, -1f,       0f, 0f, 0f, 1f
+        // Позиции          // Цвета (с альфа-каналом)
+        -1f, 1f, 1f,       0f, 0f, 0f, 0.5f, // Прозрачность 50%
+        -1f, -1f, 1f,      0f, 0f, 0f, 0.5f,
+        1f, -1f, 1f,       0f, 0f, 1f, 0.5f,
+        1f, 1f, 1f,        0f, 0f, 0f, 0.5f,
+        -1f, 1f, -1f,      0f, 0f, 0f, 0.5f,
+        -1f, -1f, -1f,     0f, 0f, 0f, 0.5f,
+        1f, -1f, -1f,      0f, 0f, 1f, 0.5f,
+        1f, 1f, -1f,       0f, 0f, 0f, 0.5f
     )
-
 
     private val indices = shortArrayOf(
         0, 1, 2, 0, 2, 3,
@@ -55,6 +54,9 @@ class Cube {
     }
 
     fun draw(mvpMatrix: FloatArray) {
+        GLES20.glEnable(GLES20.GL_BLEND)
+        GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA)
+
         shaderProgram.use()
 
         val positionHandle = GLES20.glGetAttribLocation(shaderProgram.programId, "a_Position")
@@ -78,10 +80,9 @@ class Cube {
 
         GLES20.glDisableVertexAttribArray(positionHandle)
         GLES20.glDisableVertexAttribArray(colorHandle)
+
+        GLES20.glDisable(GLES20.GL_BLEND)
     }
-
-
-
 
     companion object {
         @Language("GLSL")
