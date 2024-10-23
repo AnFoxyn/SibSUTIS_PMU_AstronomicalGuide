@@ -8,18 +8,24 @@ import android.opengl.GLUtils
 import android.opengl.Matrix
 import com.sibsutis.galaxyapp.presentation.opengl.objects.Sphere
 import com.sibsutis.galaxyapp.R
+import com.sibsutis.galaxyapp.presentation.opengl.objects.Cube
 import com.sibsutis.galaxyapp.presentation.opengl.objects.TexturedSquare
 import org.intellij.lang.annotations.Language
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
+import java.nio.ShortBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.cos
 import kotlin.math.sin
 
-class OpenGLAstro(private val context: Context) : GLSurfaceView.Renderer {
+class OpenGLAstro(
+    private val context: Context,
+    private val planetsNum: Int
+) : GLSurfaceView.Renderer {
     private lateinit var sphere: Sphere
+    private lateinit var cube: Cube
     private lateinit var square: TexturedSquare
     private var textureId: Int = 0
     var sphereAngle = 0f
@@ -62,6 +68,11 @@ class OpenGLAstro(private val context: Context) : GLSurfaceView.Renderer {
     private var positionHandle: Int = 0
     private var colorHandle: Int = 0
 
+    private var planetInt = planetsNum
+    fun setSelectedPlanet(newPlanetNum: Int) {
+        planetInt = newPlanetNum
+    }
+
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         GLES20.glClearColor(0f, 0f, 0f, 1f)
         GLES20.glEnable(GLES20.GL_DEPTH_TEST)
@@ -88,69 +99,77 @@ class OpenGLAstro(private val context: Context) : GLSurfaceView.Renderer {
         planetTextures[0] = loadTexture(context, R.drawable.mercury)
         planetTextures[1] = loadTexture(context, R.drawable.venus)
         planetTextures[2] = loadTexture(context, R.drawable.earth)
-        planetTextures[3] = loadTexture(context, R.drawable.mars)
-        planetTextures[4] = loadTexture(context, R.drawable.jupiter)
-        planetTextures[5] = loadTexture(context, R.drawable.saturn)
-        planetTextures[6] = loadTexture(context, R.drawable.uranus)
-        planetTextures[7] = loadTexture(context, R.drawable.neptune)
-        planetTextures[8] = loadTexture(context, R.drawable.pluto)
+        planetTextures[3] = loadTexture(context, R.drawable.moon) // луна
+        planetTextures[4] = loadTexture(context, R.drawable.mars) // марс
+        planetTextures[5] = loadTexture(context, R.drawable.jupiter)
+        planetTextures[6] = loadTexture(context, R.drawable.saturn)
+        planetTextures[7] = loadTexture(context, R.drawable.uranus)
+        planetTextures[8] = loadTexture(context, R.drawable.neptune)
 
         textureId = loadTexture(context, R.drawable.sun)
 
         square = TexturedSquare(context)
         square.initialize()
 
-        // Initialize line shaders
+        cube = Cube()
+        cube.initialize()
+
         lineProgram = loadLineShaderProgram()
     }
 
     override fun onDrawFrame(gl: GL10?) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // Draw galaxy background
         Matrix.setIdentityM(modelMatrix, 0)
         Matrix.scaleM(modelMatrix, 0, 15f, 10f, 1f)
         Matrix.multiplyMM(mVPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
         Matrix.multiplyMM(mVPMatrix, 0, mVPMatrix, 0, modelMatrix, 0)
         square.draw(mVPMatrix)
 
-        // Draw sun
         Matrix.setIdentityM(modelMatrix, 0)
-        Matrix.translateM(modelMatrix, 0, 0f, 0f, -5f) // Sun at the center
+        Matrix.translateM(modelMatrix, 0, 0f, 0f, -5f) // Солнце в центре
         Matrix.multiplyMM(mVPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
         Matrix.multiplyMM(mVPMatrix, 0, mVPMatrix, 0, modelMatrix, 0)
         sun.draw(mVPMatrix, textureId)
 
-        // Draw planets with orbits
         for (i in planets.indices) {
-            // Draw orbit
             drawOrbit(orbitRadii[i])
 
             Matrix.setIdentityM(modelMatrix, 0)
 
-            // Rotate planet around the sun
             val angle = planetAngles[i]
             val radius = orbitRadii[i]
             val x = radius * cos(Math.toRadians(angle.toDouble())).toFloat()
             val y = radius * sin(Math.toRadians(angle.toDouble())).toFloat()
 
-            Matrix.translateM(modelMatrix, 0, x, y, -5f) // Position the planet
+            Matrix.translateM(modelMatrix, 0, x, y, -5f) // Позиция планеты
             Matrix.multiplyMM(mVPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
             Matrix.multiplyMM(mVPMatrix, 0, mVPMatrix, 0, modelMatrix, 0)
 
-            // Draw the planet with its texture
             planets[i].draw(mVPMatrix, planetTextures[i])
 
-            // Update angle for orbiting
             planetAngles[i] = (planetAngles[i] + rotationSpeeds[i]) % 360
-
-            // Rotate the planet around its own axis
             Matrix.rotateM(modelMatrix, 0, planetAngles[i] * planetRotationSpeeds[i], 0f, 1f, 0f)
             Matrix.multiplyMM(mVPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
             Matrix.multiplyMM(mVPMatrix, 0, mVPMatrix, 0, modelMatrix, 0)
-            planets[i].draw(mVPMatrix, planetTextures[i]) // Draw again with the rotation
-        }
+            planets[i].draw(mVPMatrix, planetTextures[i])
 
+            if (i == planetInt) {
+                drawTransparentCubeForPlanet(modelMatrix)
+            }
+        }
+    }
+
+    private fun drawTransparentCubeForPlanet(planetMatrix: FloatArray) {
+        val planetModelMatrix = FloatArray(16)
+        System.arraycopy(planetMatrix, 0, planetModelMatrix, 0, planetMatrix.size)
+
+        Matrix.scaleM(planetModelMatrix, 0, 0.4f, 0.4f, 0.4f)
+
+        Matrix.multiplyMM(mVPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
+        Matrix.multiplyMM(mVPMatrix, 0, mVPMatrix, 0, planetModelMatrix, 0)
+
+        cube.draw(mVPMatrix)
     }
 
     private fun drawOrbit(radius: Float) {
@@ -214,7 +233,6 @@ class OpenGLAstro(private val context: Context) : GLSurfaceView.Renderer {
         return shader
     }
 
-    // Create a direct FloatBuffer
     private fun createDirectFloatBuffer(data: FloatArray): FloatBuffer {
         val buffer = ByteBuffer.allocateDirect(data.size * 4) // 4 bytes per float
             .order(ByteOrder.nativeOrder()) // Set to native byte order
@@ -231,7 +249,6 @@ class OpenGLAstro(private val context: Context) : GLSurfaceView.Renderer {
         Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, 5f, 0f, 0f, 0f, 0f, 1f, 0f)
     }
 
-    // Load texture helper function
     private fun loadTexture(context: Context, resourceId: Int): Int {
         val textureHandle = IntArray(1)
 
