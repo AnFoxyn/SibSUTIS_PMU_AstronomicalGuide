@@ -103,7 +103,7 @@ fun MainScreen() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = CubeScreen,
+                startDestination = AstroScreen,
                 modifier = Modifier.padding(innerPadding)
             ) {
                 composable<FourScreen> {
