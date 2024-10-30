@@ -14,3 +14,6 @@ object AstroScreen
 
 @Serializable
 object CubeScreen
+
+@Serializable
+object MoonScreen

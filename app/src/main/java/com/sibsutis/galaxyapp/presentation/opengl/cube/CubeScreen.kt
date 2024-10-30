@@ -1,4 +1,4 @@
-package com.sibsutis.galaxyapp.presentation.opengl
+package com.sibsutis.galaxyapp.presentation.opengl.cube
 
 import android.content.Context
 import android.opengl.GLSurfaceView

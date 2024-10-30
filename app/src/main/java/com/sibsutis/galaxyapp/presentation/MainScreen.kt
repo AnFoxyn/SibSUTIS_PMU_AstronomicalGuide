@@ -34,11 +34,13 @@ import com.sibsutis.galaxyapp.common.AdvScreen
 import com.sibsutis.galaxyapp.common.AstroScreen
 import com.sibsutis.galaxyapp.common.CubeScreen
 import com.sibsutis.galaxyapp.common.FourScreen
+import com.sibsutis.galaxyapp.common.MoonScreen
 import com.sibsutis.galaxyapp.presentation.AdvScreen.advScreen
 import com.sibsutis.galaxyapp.presentation.NewsScreen.NavigationItem
 import com.sibsutis.galaxyapp.presentation.NewsScreen.components.FourScreen
-import com.sibsutis.galaxyapp.presentation.opengl.AstroScreen
-import com.sibsutis.galaxyapp.presentation.opengl.CubeScreen
+import com.sibsutis.galaxyapp.presentation.opengl.astro.AstroScreen
+import com.sibsutis.galaxyapp.presentation.opengl.cube.CubeScreen
+import com.sibsutis.galaxyapp.presentation.opengl.moon.Moon
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,6 +69,11 @@ fun MainScreen() {
             title = R.string.adv_word,
             icon = ImageVector.vectorResource(R.drawable.baseline_ad_units_24),
             navigate = { navController.navigate(AdvScreen)}
+        ),
+        NavigationItem(
+            title = R.string.moon_word,
+            icon = ImageVector.vectorResource(R.drawable.baseline_nightlight_round_24),
+            navigate = { navController.navigate(MoonScreen)}
         )
     )
     var selectedItemIndex by rememberSaveable { mutableStateOf(0) }
@@ -103,7 +110,7 @@ fun MainScreen() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = AstroScreen,
+                startDestination = MoonScreen,
                 modifier = Modifier.padding(innerPadding)
             ) {
                 composable<FourScreen> {
@@ -117,6 +124,9 @@ fun MainScreen() {
                 }
                 composable<CubeScreen> {
                     CubeScreen(context = LocalContext.current)
+                }
+                composable<MoonScreen> {
+                    Moon(context = LocalContext.current)
                 }
             }
         }

@@ -58,14 +58,11 @@ android {
 
 dependencies {
 
-
     implementation(libs.kotlinx.serialization.json)
-    //kapt("groupId:artifactId:version")
-    implementation("com.google.dagger:hilt-android:2.52")
-    kapt("com.google.dagger:hilt-compiler:2.52")
+    implementation(libs.hilt.android)
+    kapt(libs.google.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation("androidx.navigation:navigation-compose:2.8.0")
-
+    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)
