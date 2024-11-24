@@ -17,3 +17,12 @@ object CubeScreen
 
 @Serializable
 object MoonScreen
+
+@Serializable
+object NeptuneScreen
+
+@Serializable
+object CoursePopov
+
+@Serializable
+object CourseKornilov

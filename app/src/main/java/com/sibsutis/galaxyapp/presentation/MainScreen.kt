@@ -32,15 +32,21 @@ import androidx.navigation.compose.rememberNavController
 import com.sibsutis.galaxyapp.R
 import com.sibsutis.galaxyapp.common.AdvScreen
 import com.sibsutis.galaxyapp.common.AstroScreen
+import com.sibsutis.galaxyapp.common.CourseKornilov
+import com.sibsutis.galaxyapp.common.CoursePopov
 import com.sibsutis.galaxyapp.common.CubeScreen
 import com.sibsutis.galaxyapp.common.FourScreen
 import com.sibsutis.galaxyapp.common.MoonScreen
+import com.sibsutis.galaxyapp.common.NeptuneScreen
 import com.sibsutis.galaxyapp.presentation.AdvScreen.advScreen
 import com.sibsutis.galaxyapp.presentation.NewsScreen.NavigationItem
 import com.sibsutis.galaxyapp.presentation.NewsScreen.components.FourScreen
 import com.sibsutis.galaxyapp.presentation.opengl.astro.AstroScreen
+import com.sibsutis.galaxyapp.presentation.opengl.courseKornilov.CourseScreen
+import com.sibsutis.galaxyapp.presentation.opengl.coursePopov.Natyurmort
 import com.sibsutis.galaxyapp.presentation.opengl.cube.CubeScreen
 import com.sibsutis.galaxyapp.presentation.opengl.moon.Moon
+import com.sibsutis.galaxyapp.presentation.opengl.water.Neptune
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,7 +80,23 @@ fun MainScreen() {
             title = R.string.moon_word,
             icon = ImageVector.vectorResource(R.drawable.baseline_nightlight_round_24),
             navigate = { navController.navigate(MoonScreen)}
+        ),
+        NavigationItem(
+        title = R.string.neptune_word,
+        icon = ImageVector.vectorResource(R.drawable.baseline_water_24),
+        navigate = { navController.navigate(NeptuneScreen)}
+        ),
+        NavigationItem(
+            title = R.string.course_popov,
+            icon = ImageVector.vectorResource(R.drawable.baseline_android_24),
+            navigate = { navController.navigate(CoursePopov)}
+        ),
+        NavigationItem(
+            title = R.string.course_Kornilov,
+            icon = ImageVector.vectorResource(R.drawable.baseline_pets_24),
+            navigate = { navController.navigate(CourseKornilov)}
         )
+
     )
     var selectedItemIndex by rememberSaveable { mutableStateOf(0) }
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -110,7 +132,7 @@ fun MainScreen() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = MoonScreen,
+                startDestination = CourseKornilov,
                 modifier = Modifier.padding(innerPadding)
             ) {
                 composable<FourScreen> {
@@ -127,6 +149,15 @@ fun MainScreen() {
                 }
                 composable<MoonScreen> {
                     Moon(context = LocalContext.current)
+                }
+                composable<NeptuneScreen> {
+                    Neptune(context = LocalContext.current)
+                }
+                composable<CoursePopov> {
+                    Natyurmort(context = LocalContext.current)
+                }
+                composable<CourseKornilov> {
+                    CourseScreen(context = LocalContext.current)
                 }
             }
         }
