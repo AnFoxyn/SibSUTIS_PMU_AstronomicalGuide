@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
@@ -39,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.sibsutis.galaxyapp.presentation.opengl.moon.Moon
+import com.sibsutis.galaxyapp.presentation.opengl.water.Neptune
 
 // TODO Поправить экран
 
@@ -82,6 +85,12 @@ fun AstroScreen(modifier: Modifier = Modifier, context: Context) {
                         .fillMaxWidth()
                         .height(260.dp)
                 ) { Moon(context = context) }
+                else if(selectedPlanet == PlanetsData.name.size - 1)
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(260.dp)
+                    ) { Neptune(context = context) }
                 else {
                     Image(
                         ImageBitmap.imageResource(PlanetsData.planetImage[selectedPlanet]), ""
@@ -100,8 +109,6 @@ fun AstroScreen(modifier: Modifier = Modifier, context: Context) {
         }
     }
 
-
-
     AndroidView(
         factory = {
             openGlView
@@ -112,14 +119,12 @@ fun AstroScreen(modifier: Modifier = Modifier, context: Context) {
         }
     )
 
-
     Box(
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
-
-
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
             horizontalArrangement = Arrangement.Center,
         ) {
             IconButton(
@@ -131,7 +136,9 @@ fun AstroScreen(modifier: Modifier = Modifier, context: Context) {
                 colors = IconButtonDefaults.filledIconButtonColors()
             ) { Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "") }
 
-            Button(onClick = {
+            Button(
+                modifier = Modifier.size(width = 200.dp, height = 41.dp),
+                onClick = {
                 showBottomSheet = true
             }) {
                 Text(text = PlanetsData.name[selectedPlanet])

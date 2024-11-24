@@ -35,6 +35,14 @@ class OpenGLAstro(
     private val mVPMatrix = FloatArray(16)
 
     private lateinit var sun: Sphere
+
+    private lateinit var blackHole: Sphere
+    //private var blackHoleTexture: Int = 0
+    private var blackHoleX = 5f
+    private var blackHoleY = 5f
+    private val blackHoleSpeed = 0.005f
+    private var showBlackHole = true
+
     private lateinit var planets: List<Sphere>
     private lateinit var planetTextures: IntArray
     private val planetAngles = FloatArray(9)
@@ -48,7 +56,7 @@ class OpenGLAstro(
         5.8f,  // Saturn
         6.2f,  // Uranus
         6.9f   // Neptune
-    ) // Increased distances
+    )
 
     private val rotationSpeeds = floatArrayOf(
         2f,  // Mercury
@@ -60,7 +68,7 @@ class OpenGLAstro(
         0.7f, // Uranus
         0.6f, // Neptune
         0.5f  // Pluto (if included)
-    ) // Reduced speeds
+    )
     private val planetRotationSpeeds = FloatArray(9) { 10f } // Rotation speed for each planet
 
     private var lineProgram: Int = 0
@@ -113,6 +121,9 @@ class OpenGLAstro(
         cube = Cube()
         cube.initialize()
 
+        blackHole = Sphere(radius = 0.5f)
+        blackHole.initialize()
+
         lineProgram = loadLineShaderProgram()
     }
 
@@ -157,6 +168,28 @@ class OpenGLAstro(
                 drawTransparentCubeForPlanet(modelMatrix)
             }
         }
+        if (showBlackHole) {
+            blackHoleX -= blackHoleSpeed
+            blackHoleY -= blackHoleSpeed
+
+
+            if (blackHoleX < -5f || blackHoleY < -5f) {
+                resetBlackHole()
+            }
+
+            Matrix.setIdentityM(modelMatrix, 0)
+            Matrix.translateM(modelMatrix, 0, blackHoleX, blackHoleY, -5f)
+            Matrix.multiplyMM(mVPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
+            Matrix.multiplyMM(mVPMatrix, 0, mVPMatrix, 0, modelMatrix, 0)
+
+            blackHole.draw(mVPMatrix, loadTexture(context, R.drawable.black))
+        }
+    }
+
+    private fun resetBlackHole() {
+        var rand = (1..3).random()
+        blackHoleX = 50f*rand
+        blackHoleY = 50f*rand
     }
 
     private fun drawTransparentCubeForPlanet(planetMatrix: FloatArray) {
@@ -215,7 +248,6 @@ class OpenGLAstro(
     """.trimIndent()
 
     private fun loadLineShaderProgram(): Int {
-        // Load the vertex and fragment shaders for the lines and create a program
         val vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode)
         val fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode)
         val program = GLES20.glCreateProgram()
@@ -233,8 +265,8 @@ class OpenGLAstro(
     }
 
     private fun createDirectFloatBuffer(data: FloatArray): FloatBuffer {
-        val buffer = ByteBuffer.allocateDirect(data.size * 4) // 4 bytes per float
-            .order(ByteOrder.nativeOrder()) // Set to native byte order
+        val buffer = ByteBuffer.allocateDirect(data.size * 4)
+            .order(ByteOrder.nativeOrder())
             .asFloatBuffer()
         buffer.put(data)
         buffer.position(0)
