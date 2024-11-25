@@ -11,4 +11,7 @@
     <string name="adv_word">Реклама</string>
     <string name="cube_word">Куб</string>
     <string name="moon_word">Луна</string>
+    <string name="neptune_word">Нептун</string>
+    <string name="course_popov">Курсовой Попов</string>
+    <string name="course_Kornilov">Курсовой Корнилов</string>
 </resources>

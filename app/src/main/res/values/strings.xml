@@ -10,4 +10,7 @@
     <string name="adv_word">Advertisement</string>
     <string name="cube_word">Cube</string>
     <string name="moon_word">Moon</string>
+    <string name="neptune_word">Neptune</string>
+    <string name="course_popov">Course Popov</string>
+    <string name="course_Kornilov">Course Kornilov</string>
 </resources>
