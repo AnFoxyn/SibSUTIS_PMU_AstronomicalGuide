@@ -1,6 +1,5 @@
-package com.sibsutis.galaxyapp.ui.theme
+package com.sibsutis.galaxyapp.presentation.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

@@ -1,4 +1,4 @@
-package com.sibsutis.galaxyapp.ui.theme
+package com.sibsutis.galaxyapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Астрономический справочник ✨</string>
+    <string name="http_error">Ошибка сервера</string>
+    <string name="io_error">Нет подключения к интернету!</string>
+    <string name="item_load">Загрузка</string>
+    <string name="item_error">Ошибка загрузки предмета</string>
+    <string name="menu_word">Меню</string>
+    <string name="news_word">Новости</string>
+    <string name="astro_word">Астрономический</string>
+    <string name="adv_word">Реклама</string>
+    <string name="cube_word">Куб</string>
+    <string name="moon_word">Луна</string>
+    <string name="neptune_word">Нептун</string>
+    <string name="course_popov">Курсовой Попов</string>
+    <string name="course_Kornilov">Курсовой Корнилов</string>
+</resources>
